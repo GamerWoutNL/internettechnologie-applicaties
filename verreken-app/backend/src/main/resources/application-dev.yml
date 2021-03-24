@@ -1,0 +1,11 @@
+server.port: 1245
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:7845/verreken-app
+    username: verreken-app
+    password: verreken-app
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate.ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect

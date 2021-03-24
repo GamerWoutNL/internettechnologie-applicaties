@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+    database:
+        image: postgres:alpine
+        ports:
+            - 7845:5432
+        environment:
+            POSTGRES_DB: verreken-app
+            POSTGRES_USER: verreken-app
+            POSTGRES_PASSWORD: verreken-app
+    backend:
+        build: ./backend
+        ports:
+            - 1245:1245
+        depends_on:
+            - database
+    # frontend:
+    #     build: ./frontend
+    #     ports: 
+    #         - 9001:80
