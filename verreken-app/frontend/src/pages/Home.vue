@@ -1,9 +1,9 @@
 <template>
-    <q-page>
-        <q-input rounded standout v-model="text" />
-        <q-btn @click="send()">Add</q-btn>
-        <q-btn @click="again()">Again</q-btn>
-    </q-page>
+  <q-page>
+    <q-input rounded standout v-model="text" />
+    <q-btn @click="send()">Add</q-btn>
+    <q-btn @click="again()">Again</q-btn>
+  </q-page>
 </template>
 
 <script lang="ts">
