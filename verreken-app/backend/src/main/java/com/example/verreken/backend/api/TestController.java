@@ -1,26 +1,24 @@
 package com.example.verreken.backend.api;
 
-import com.example.verreken.backend.model.Message;
-import com.example.verreken.backend.services.DatabaseService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api")
 public class TestController {
 
-    private final DatabaseService databaseService;
+    private final WebSocketController webSocketController;
 
-    public TestController(DatabaseService databaseService) {
-        this.databaseService = databaseService;
+    public TestController(WebSocketController webSocketController) {
+        this.webSocketController = webSocketController;
     }
 
-    @GetMapping("messages")
-    public List<Message> getAllMessages() {
-        return this.databaseService.getAllMessages();
+
+    @GetMapping("test")
+    public void test() {
+        this.webSocketController.send("test");
     }
 
 }
