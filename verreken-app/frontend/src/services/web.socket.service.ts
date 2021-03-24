@@ -1,0 +1,40 @@
+import SockJS from 'sockjs-client'
+import Stomp, { Client } from 'webstomp-client'
+
+export class WebSocketService {
+  private socket: unknown
+  private stompClient: Client
+
+  connect (onMessageReceive: (message: string) => void): void {
+    this.socket = new SockJS('http://localhost:1245/verreken')
+    this.stompClient = Stomp.over(this.socket)
+
+    this.stompClient.connect(
+      {},
+      (frame) => {
+        console.log(frame)
+
+        this.stompClient.subscribe('/topic/data', (tick) => {
+          // console.log(tick.body)
+          onMessageReceive(tick.body)
+        })
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
+
+  disconnect (): void {
+    if (this.stompClient) {
+      this.stompClient.disconnect()
+    }
+  }
+
+  send (payload: string): void {
+    if (this.stompClient && this.stompClient.connected) {
+      this.stompClient.send('/app/data', payload, {})
+      console.log('Send message: ' + payload)
+    }
+  }
+}
