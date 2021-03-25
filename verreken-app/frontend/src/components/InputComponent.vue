@@ -1,15 +1,16 @@
 <template>
   <div>
-    <q-input class="margin" rounded outlined v-model="name" label="Naam">
+    <q-input class="margin font-light" rounded outlined v-model="name" label="Naam">
       <template v-if="!isNameCorrect" v-slot:append>
         <q-icon name="priority_high" color="red" />
       </template>
     </q-input>
-    <q-input class="margin" rounded outlined v-model="payment" label="Inleg">
-      <template v-if="!isPaymentCorrect" v-slot:append>
+    <q-input class="margin font-light" rounded outlined v-model="amount" label="Inleg">
+      <template v-if="!isAmountCorrect" v-slot:append>
         <q-icon name="priority_high" color="red" />
       </template>
     </q-input>
+    <q-input class="margin font-light" rounded outlined v-model="description" label="Beschrijving" />
     <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="add" />
     <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="again" />
     <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="done" />
@@ -18,30 +19,32 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { User } from '../model/user'
+import { Payment } from '../model/payment'
 
 @Component({
   components: { }
 })
 export default class InputComponent extends Vue {
   private name = ''
-  private payment = ''
+  private amount = ''
+  private description = ''
   private isNameCorrect = true
-  private isPaymentCorrect = true
+  private isAmountCorrect = true
 
   add (): void {
-    this.payment = this.payment.replace(/,/g, '.')
+    this.amount = this.amount.replace(/,/g, '.')
 
     this.isNameCorrect = this.isName(this.name)
-    this.isPaymentCorrect = this.isNumber(this.payment)
+    this.isAmountCorrect = this.isNumber(this.amount)
 
-    if (this.isNameCorrect && this.isPaymentCorrect) {
-      const user: User = {
+    if (this.isNameCorrect && this.isAmountCorrect) {
+      const payment: Payment = {
         name: this.name,
-        payment: parseFloat(this.payment).toFixed(2)
+        amount: parseFloat(this.amount).toFixed(2),
+        description: this.description
       }
 
-      this.$emit('clicked', user)
+      this.$emit('clicked', payment)
       this.reset()
     }
   }
@@ -56,9 +59,10 @@ export default class InputComponent extends Vue {
 
   reset (): void {
     this.name = ''
-    this.payment = ''
+    this.amount = ''
+    this.description = ''
     this.isNameCorrect = true
-    this.isPaymentCorrect = true
+    this.isAmountCorrect = true
   }
 
   isName (n: any): boolean {

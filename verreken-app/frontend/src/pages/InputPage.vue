@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <input-component @clicked="onClicked" />
-    <show-component :users="users" />
+    <show-component :payments="payments" />
   </q-page>
 </template>
 
@@ -9,8 +9,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import InputComponent from 'components/InputComponent.vue'
 import ShowComponent from 'components/ShowComponent.vue'
-import WebSocketService from '../services/web.socket.service'
-import { User } from '../model/user'
+import { Payment } from '../model/payment'
 
 @Component({
   components: {
@@ -19,38 +18,22 @@ import { User } from '../model/user'
   }
 })
 export default class InputPage extends Vue {
-  private webSocketService: WebSocketService
-  private users: User[] = []
-
-  send (message: string): void {
-    this.webSocketService.send(message)
-  }
+  private payments: Payment[] = []
 
   onClicked (val: any): void {
     if (val === 'done') {
       this.onDone()
     } else {
-      this.users.push(val)
+      this.payments.push(val)
     }
   }
 
   onDone (): void {
-    console.log('were done boys')
+    this.redirect('/result')
   }
 
-  onMessage (message: string): void {
-    console.log(message)
-  }
-
-  mounted () {
-    this.webSocketService = new WebSocketService()
-    this.webSocketService.connect((message) => {
-      this.onMessage(message)
-    })
-  }
-
-  beforeDestroy () {
-    this.webSocketService.disconnect()
+  redirect (path: string): void {
+    this.$router.push({ path: path })
   }
 }
 </script>
