@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <input-component @clicked="onClicked" />
-    <show-component />
+    <show-component :users="users" />
   </q-page>
 </template>
 
