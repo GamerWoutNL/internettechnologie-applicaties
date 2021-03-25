@@ -2,6 +2,7 @@
   <q-layout>
     <q-header elevated>
       <q-toolbar>
+        <q-icon name="euro" size="8vw" />
         <q-toolbar-title class="font-medium header-text">Wie betaald wie</q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -27,6 +28,6 @@ export default class MainLayout extends Vue { }
 
 <style lang="scss">
 .header-text {
-  font-size: 3vw;
+  font-size: 6vw;
 }
 </style>

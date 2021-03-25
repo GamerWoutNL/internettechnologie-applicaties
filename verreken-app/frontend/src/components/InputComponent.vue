@@ -1,17 +1,18 @@
 <template>
   <div>
-    <q-input rounded standout v-model="name" label="Naam">
+    <q-input class="margin" rounded outlined v-model="name" label="Naam">
       <template v-if="!isNameCorrect" v-slot:append>
         <q-icon name="priority_high" color="red" />
       </template>
     </q-input>
-    <q-input rounded standout v-model="payment" label="Inleg">
+    <q-input class="margin" rounded outlined v-model="payment" label="Inleg">
       <template v-if="!isPaymentCorrect" v-slot:append>
         <q-icon name="priority_high" color="red" />
       </template>
     </q-input>
-    <q-btn @click="add">Toevoegen</q-btn>
-    <q-btn @click="again">Opnieuw</q-btn>
+    <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="add" />
+    <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="again" />
+    <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="done" />
   </div>
 </template>
 
@@ -40,13 +41,17 @@ export default class InputComponent extends Vue {
         payment: parseFloat(this.payment).toFixed(2)
       }
 
-      this.$emit('add', user)
+      this.$emit('clicked', user)
       this.reset()
     }
   }
 
   again (): void {
     this.reset()
+  }
+
+  done (): void {
+    this.$emit('clicked', 'done')
   }
 
   reset (): void {
@@ -65,3 +70,9 @@ export default class InputComponent extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+.margin {
+  margin: 3vw;
+}
+</style>
