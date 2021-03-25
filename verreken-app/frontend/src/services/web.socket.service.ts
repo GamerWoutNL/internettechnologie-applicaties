@@ -1,7 +1,7 @@
 import SockJS from 'sockjs-client'
 import Stomp, { Client } from 'webstomp-client'
 
-export class WebSocketService {
+export default class WebSocketService {
   private socket: unknown
   private stompClient: Client
 
@@ -15,7 +15,6 @@ export class WebSocketService {
         console.log(frame)
 
         this.stompClient.subscribe('/topic/data', (tick) => {
-          // console.log(tick.body)
           onMessageReceive(tick.body)
         })
       },
