@@ -33,7 +33,6 @@ export default class WebSocketService {
   send (payload: string): void {
     if (this.stompClient && this.stompClient.connected) {
       this.stompClient.send('/app/data', payload, {})
-      console.log('Send message: ' + payload)
     }
   }
 }

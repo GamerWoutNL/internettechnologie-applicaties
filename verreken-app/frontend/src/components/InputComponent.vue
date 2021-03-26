@@ -11,9 +11,10 @@
       </template>
     </q-input>
     <q-input class="margin font-light" rounded outlined v-model="description" label="Beschrijving" />
-    <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="add" />
-    <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="again" />
-    <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="done" />
+    <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="onAdd" />
+    <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="onRemove" />
+    <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="onDone" />
+    <q-btn class="margin" icon="history" size="5vw" round color="primary" @click="onHistory" />
   </div>
 </template>
 
@@ -31,7 +32,7 @@ export default class InputComponent extends Vue {
   private isNameCorrect = true
   private isAmountCorrect = true
 
-  add (): void {
+  onAdd (): void {
     this.amount = this.amount.replace(/,/g, '.')
 
     this.isNameCorrect = this.isName(this.name)
@@ -49,12 +50,16 @@ export default class InputComponent extends Vue {
     }
   }
 
-  again (): void {
-    this.reset()
+  onRemove (): void {
+    this.$emit('clicked', 'remove')
   }
 
-  done (): void {
+  onDone (): void {
     this.$emit('clicked', 'done')
+  }
+
+  onHistory (): void {
+    this.$emit('clicked', 'history')
   }
 
   reset (): void {

@@ -15,7 +15,6 @@ public class TestController {
         this.webSocketController = webSocketController;
     }
 
-
     @GetMapping("test")
     public void test() {
         this.webSocketController.send("test");
