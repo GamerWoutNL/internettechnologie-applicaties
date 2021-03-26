@@ -1,13 +1,9 @@
 version: '3.5'
 services:
     database:
-        image: postgres:alpine
+        image: mongo:latest
         ports:
-            - 7845:5432
-        environment:
-            POSTGRES_DB: verreken-app
-            POSTGRES_USER: verreken-app
-            POSTGRES_PASSWORD: verreken-app
+        - 27001:27017
     backend:
         build: ./backend
         ports:
