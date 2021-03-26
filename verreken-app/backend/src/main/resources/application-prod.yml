@@ -6,5 +6,5 @@ auth:
 
 spring.data.mongodb:
   host: database
-  port: 27001
+  port: 27017
   database: verreken-app
