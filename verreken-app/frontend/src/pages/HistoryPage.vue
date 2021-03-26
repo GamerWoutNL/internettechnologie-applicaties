@@ -38,7 +38,8 @@ export default class HistoryPage extends Vue {
   mounted () {
     this.httpService = new HttpService()
     this.httpService.getHistory().then((response) => {
-      this.settlements = JSON.parse(response.data) as Settlement[]
+      console.log(response.data)
+      this.settlements = response.data as Settlement[]
     }).catch((error) => {
       console.log(error)
     })
