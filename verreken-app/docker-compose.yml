@@ -10,7 +10,9 @@ services:
             - 1245:1245
         depends_on:
             - database
-    # frontend:
-    #     build: ./frontend
-    #     ports: 
-    #         - 9001:80
+    frontend:
+        build: ./frontend
+        ports: 
+            - 5632:80
+        depends_on:
+            - backend

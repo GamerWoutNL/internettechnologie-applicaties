@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Settlement } from '../model/settlement'
 import { Payment } from '../model/payment'
 
 export default class HttpService {
@@ -8,13 +7,13 @@ export default class HttpService {
     password: 'user'
   }
 
-  async postPayments (payments: Payment[]): Promise<string> {
+  async postPayments (payments: Payment[]) {
     return await axios.post('http://localhost:1245/api/payment', payments, {
       auth: this.auth
     })
   }
 
-  async getHistory (): Promise<Settlement[]> {
+  async getHistory () {
     return await axios.get('http://localhost:1245/api/history', {
       auth: this.auth
     })

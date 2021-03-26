@@ -36,7 +36,7 @@ export default class HomePage extends Vue {
   }
 
   onMessage (message: string): void {
-    this.settlement = JSON.parse(message)
+    this.settlement = JSON.parse(message) as Settlement
   }
 
   redirect (path: string): void {
