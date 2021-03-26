@@ -31,6 +31,7 @@ export default class InputComponent extends Vue {
   private description = ''
   private isNameCorrect = true
   private isAmountCorrect = true
+  private id = 0
 
   onAdd (): void {
     this.amount = this.amount.replace(/,/g, '.')
@@ -40,10 +41,13 @@ export default class InputComponent extends Vue {
 
     if (this.isNameCorrect && this.isAmountCorrect) {
       const payment: Payment = {
+        id: this.id,
         name: this.name,
         amount: parseFloat(this.amount).toFixed(2),
         description: this.description
       }
+
+      this.id++
 
       this.$emit('clicked', payment)
       this.reset()

@@ -3,8 +3,8 @@
     <q-separator />
     <div class="margin font-medium" style="font-size: 5vw">Inleg</div>
     <q-scroll-area style="height: 15vh; max-width: 100vw;">
-      <div class="margin font-light" v-for="payment in payments" :key="payment.name">
-        {{payment.name}} heeft €{{payment.amount}} ingelegd voor '{{payment.description}}'.
+      <div class="margin font-light" v-for="payment in payments" :key="payment.id">
+        {{payment.name}} heeft €{{payment.amount}} ingelegd voor '{{payment.description}}'
       </div>
     </q-scroll-area>
     <div class="margin font-medium" v-if="this.totalPayments > 0">In totaal is er €{{totalPayments.toFixed(2)}} verbrast!</div>
@@ -22,7 +22,7 @@ import { Payment } from '../model/payment'
 export default class StakeComponent extends Vue {
   @Prop() readonly payments: Payment[]
 
-  totalPayments = 0
+  private totalPayments = 0
 
   mounted () {
     this.refreshPayments()

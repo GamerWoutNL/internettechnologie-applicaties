@@ -2,7 +2,7 @@
   <q-page>
     <input-component @clicked="onClicked" />
     <stake-component :payments="payments" />
-    <settlement-component />
+    <settlement-component :settlement="settlement" />
   </q-page>
 </template>
 
@@ -13,6 +13,7 @@ import StakeComponent from 'components/StakeComponent.vue'
 import SettlementComponent from 'components/SettlementComponent.vue'
 import WebSocketService from '../services/web.socket.service'
 import { Payment } from '../model/payment'
+import { Settlement } from '../model/settlement'
 
 @Component({
   components: {
@@ -24,13 +25,14 @@ import { Payment } from '../model/payment'
 export default class HomePage extends Vue {
   private webSocketService: WebSocketService
   private payments: Payment[] = []
+  private settlement: Settlement = <Settlement>{}
 
   send (message: string): void {
     this.webSocketService.send(message)
   }
 
   onMessage (message: string): void {
-    console.log(message)
+    this.settlement = JSON.parse(message)
   }
 
   redirect (path: string): void {
@@ -72,14 +74,18 @@ export default class HomePage extends Vue {
   }
 
   onDone (): void {
-    if (this.payments.length > 0) {
-      this.send(JSON.stringify(this.payments))
+    if (this.payments.length > 1) {
+      // request history
       this.payments = []
     }
   }
 
   onRemove (): void {
     this.payments.pop()
+
+    if (this.payments.length > 1) {
+      this.send(JSON.stringify(this.payments))
+    }
   }
 
   onHistory (): void {
@@ -87,7 +93,11 @@ export default class HomePage extends Vue {
   }
 
   onNewPayment (payment: Payment): void {
-    this.payments.push(payment)
+    this.payments.unshift(payment)
+
+    if (this.payments.length > 1) {
+      this.send(JSON.stringify(this.payments))
+    }
   }
 }
 </script>

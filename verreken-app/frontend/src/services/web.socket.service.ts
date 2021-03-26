@@ -33,6 +33,7 @@ export default class WebSocketService {
   send (payload: string): void {
     if (this.stompClient && this.stompClient.connected) {
       this.stompClient.send('/app/data', payload, {})
+      // this.stompClient.send('/app/data', '[{"id":0,"name":"Wout","amount":"54.00","description":"pizza"},{"id":1,"name":"Dirk","amount":"65.00","description":"bier"},{"id":2,"name":"Dennis","amount":"196.00","description":"fiets"}]', {})
     }
   }
 }
