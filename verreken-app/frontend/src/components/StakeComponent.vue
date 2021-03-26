@@ -1,6 +1,5 @@
 <template>
   <div>
-    <q-separator />
     <div class="margin font-medium" style="font-size: 5vw">Inleg</div>
     <q-scroll-area style="height: 15vh; max-width: 100vw;">
       <div class="margin font-light" v-for="payment in payments" :key="payment.id">

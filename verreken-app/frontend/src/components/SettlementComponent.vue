@@ -1,6 +1,5 @@
 <template>
   <div>
-    <q-separator />
     <div class="font-medium margin" style="font-size: 5vw">Verrekeningen</div>
     <q-scroll-area style="height: 20vh; max-width: 100vw;">
       <div class="margin font-light" v-for="owe in settlement.owes" :key="owe.id">
