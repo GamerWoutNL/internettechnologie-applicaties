@@ -74,30 +74,27 @@ export default class HomePage extends Vue {
   }
 
   onDone (): void {
-    if (this.payments.length > 1) {
-      // request history
+    if (this.settlement.owes.length > 0) {
+      // save payments
       this.payments = []
+      this.settlement = <Settlement>{}
     }
   }
 
   onRemove (): void {
-    this.payments.pop()
-
-    if (this.payments.length > 1) {
-      this.send(JSON.stringify(this.payments))
-    }
+    this.payments.shift()
+    this.send(JSON.stringify(this.payments))
   }
 
   onHistory (): void {
-    this.redirect('/history')
+    if (this.payments.length === 0) {
+      this.redirect('/history')
+    }
   }
 
   onNewPayment (payment: Payment): void {
     this.payments.unshift(payment)
-
-    if (this.payments.length > 1) {
-      this.send(JSON.stringify(this.payments))
-    }
+    this.send(JSON.stringify(this.payments))
   }
 }
 </script>
