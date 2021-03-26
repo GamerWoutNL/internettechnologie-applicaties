@@ -1,7 +1,7 @@
 import SockJS from 'sockjs-client'
 import Stomp, { Client } from 'webstomp-client'
 
-export class WebSocketService {
+export default class WebSocketService {
   private socket: unknown
   private stompClient: Client
 
@@ -15,7 +15,6 @@ export class WebSocketService {
         console.log(frame)
 
         this.stompClient.subscribe('/topic/data', (tick) => {
-          // console.log(tick.body)
           onMessageReceive(tick.body)
         })
       },
@@ -34,7 +33,7 @@ export class WebSocketService {
   send (payload: string): void {
     if (this.stompClient && this.stompClient.connected) {
       this.stompClient.send('/app/data', payload, {})
-      console.log('Send message: ' + payload)
+      // this.stompClient.send('/app/data', '[{"id":0,"name":"Wout","amount":"54.00","description":"pizza"},{"id":1,"name":"Dirk","amount":"65.00","description":"bier"},{"id":2,"name":"Dennis","amount":"196.00","description":"fiets"}]', {})
     }
   }
 }
