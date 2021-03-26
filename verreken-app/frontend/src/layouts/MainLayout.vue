@@ -10,10 +10,6 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <q-footer elevated>
-      <q-toolbar />
-    </q-footer>
   </q-layout>
 </template>
 

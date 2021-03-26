@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="font-medium margin" style="font-size: 5vw">Verrekeningen</div>
+    <div class="font-light margin title" style="font-size: 5vw">Verrekeningen</div>
+    <q-separator class="seperator-margin" />
     <q-scroll-area style="height: 20vh; max-width: 100vw;">
       <div class="margin font-light" v-for="owe in settlement.owes" :key="owe.id">
           {{owe.from}} betaalt {{owe.to}} €{{owe.amount.toFixed(2)}}
@@ -24,5 +25,8 @@ export default class SettlementComponent extends Vue {
 <style lang="scss">
 .margin {
   margin: 3vw;
+}
+.title {
+  text-align: center;
 }
 </style>

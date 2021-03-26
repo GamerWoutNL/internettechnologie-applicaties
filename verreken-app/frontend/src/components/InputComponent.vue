@@ -1,20 +1,14 @@
 <template>
   <div>
-    <q-input class="margin font-light" rounded outlined v-model="name" label="Naam">
-      <template v-if="!isNameCorrect" v-slot:append>
-        <q-icon name="priority_high" color="red" />
-      </template>
-    </q-input>
-    <q-input class="margin font-light" rounded outlined v-model="amount" label="Inleg">
-      <template v-if="!isAmountCorrect" v-slot:append>
-        <q-icon name="priority_high" color="red" />
-      </template>
-    </q-input>
-    <q-input class="margin font-light" rounded outlined v-model="description" label="Beschrijving" />
-    <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="onAdd" />
-    <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="onRemove" />
-    <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="onDone" />
-    <q-btn class="margin" icon="history" size="5vw" round color="primary" @click="onHistory" />
+    <q-input class="margin font-light" outlined v-model="name" label="Naam" :rules="[ val => isName(val) || 'Vul een geldige naam in (a-Z)']" />
+    <q-input class="margin font-light" outlined v-model="amount" label="Inleg" :rules="[ val => isNumber(val) || 'Vul een juist bedrag in']" />
+    <q-input class="margin font-light" outlined v-model="description" label="Beschrijving" />
+    <div class="button-container">
+      <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="onAdd" />
+      <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="onRemove" />
+      <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="onDone" />
+      <q-btn class="margin" icon="history" size="5vw" round color="primary" @click="onHistory" />
+    </div>
   </div>
 </template>
 
@@ -87,5 +81,9 @@ export default class InputComponent extends Vue {
 <style lang="scss">
 .margin {
   margin: 3vw;
+}
+.button-container {
+  display:flex;
+  justify-content: center;
 }
 </style>

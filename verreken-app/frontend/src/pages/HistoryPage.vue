@@ -1,14 +1,14 @@
 <template>
   <q-page>
     <q-btn class="margin" icon="keyboard_return" size="5vw" round color="primary" @click="onBack" />
-    <q-scroll-area style="height: 80vh; max-width: 100vw;">
-      <div class="font-light margin" v-for="settlement in settlements" :key="settlement.id">
-        {{settlement.date}}
+    <q-scroll-area style="height: 82vh; max-width: 100vw;">
+      <q-card class="font-medium margin" v-for="settlement in settlements" :key="settlement.id">
+        <div class="date">{{settlement.date}}</div>
         <div class="font-light margin" v-for="owe in settlement.owes" :key="owe.id">
           {{owe.from}} betaalt {{owe.to}} €{{owe.amount.toFixed(2)}}
         </div>
         <q-separator />
-      </div>
+      </q-card>
     </q-scroll-area>
   </q-page>
 </template>
@@ -47,8 +47,13 @@ export default class HistoryPage extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .margin {
-  margin: 3vw;
+  margin: 5vw;
+}
+
+.date {
+  padding-top: 3vw;
+  text-align: center;
 }
 </style>
