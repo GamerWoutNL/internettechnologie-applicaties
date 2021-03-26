@@ -1,7 +1,9 @@
 <template>
   <q-page>
     <input-component @clicked="onClicked" />
+    <q-separator />
     <stake-component :payments="payments" />
+    <q-separator />
     <settlement-component :settlement="settlement" />
   </q-page>
 </template>

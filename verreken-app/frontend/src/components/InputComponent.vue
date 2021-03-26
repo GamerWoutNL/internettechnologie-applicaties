@@ -13,26 +13,8 @@
     <q-input class="margin font-light" rounded outlined v-model="description" label="Beschrijving" />
     <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="onAdd" />
     <q-btn class="margin" icon="remove" size="5vw" round color="primary" @click="onRemove" />
-    <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="onDone">
-      <q-popup-proxy>
-        <q-banner>
-          <template v-slot:avatar>
-            <q-icon name="error" color="primary" />
-          </template>
-          Je hebt nog geen verrekeningen om op te slaan.
-        </q-banner>
-      </q-popup-proxy>
-    </q-btn>
-    <q-btn class="margin" icon="history" size="5vw" round color="primary" @click="onHistory">
-      <q-popup-proxy>
-        <q-banner>
-          <template v-slot:avatar>
-            <q-icon name="error" color="primary" />
-          </template>
-          Je hebt nog inleggingen staan. Sla ze eerst op of verwijder ze.
-        </q-banner>
-      </q-popup-proxy>
-    </q-btn>
+    <q-btn class="margin" icon="done" size="5vw" round color="primary" @click="onDone" />
+    <q-btn class="margin" icon="history" size="5vw" round color="primary" @click="onHistory" />
   </div>
 </template>
 

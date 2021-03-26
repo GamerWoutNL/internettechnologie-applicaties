@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { Settlement } from '../model/settlement'
 import { Payment } from '../model/payment'
 
 export default class HttpService {
-  auth = {
+  private auth = {
     username: 'user',
     password: 'user'
   }
@@ -13,7 +14,7 @@ export default class HttpService {
     })
   }
 
-  async getHistory (): Promise<string> {
+  async getHistory (): Promise<Settlement[]> {
     return await axios.get('http://localhost:1245/api/history', {
       auth: this.auth
     })
