@@ -12,7 +12,7 @@ export interface Date {
 }
 
 export interface Settlement {
-    id: number
+    id: string
     owes: Owe[]
     date: Date
 }

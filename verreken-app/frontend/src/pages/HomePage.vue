@@ -12,6 +12,7 @@ import InputComponent from 'components/InputComponent.vue'
 import StakeComponent from 'components/StakeComponent.vue'
 import SettlementComponent from 'components/SettlementComponent.vue'
 import WebSocketService from '../services/web.socket.service'
+import HttpService from '../services/http.service'
 import { Payment } from '../model/payment'
 import { Settlement } from '../model/settlement'
 
@@ -24,6 +25,7 @@ import { Settlement } from '../model/settlement'
 })
 export default class HomePage extends Vue {
   private webSocketService: WebSocketService
+  private httpService: HttpService
   private payments: Payment[] = []
   private settlement: Settlement = <Settlement>{}
 
@@ -42,6 +44,7 @@ export default class HomePage extends Vue {
   }
 
   mounted () {
+    this.httpService = new HttpService()
     this.webSocketService = new WebSocketService()
     this.webSocketService.connect((message) => {
       this.onMessage(message)
@@ -75,7 +78,12 @@ export default class HomePage extends Vue {
 
   onDone (): void {
     if (this.settlement.owes.length > 0) {
-      // save payments
+      this.httpService.postPayments(this.payments).then((response) => {
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+      })
+
       this.payments = []
       this.settlement = <Settlement>{}
     }
