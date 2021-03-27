@@ -4,7 +4,7 @@
     <q-separator class="seperator-margin" />
     <q-scroll-area style="height: 20vh; max-width: 100vw;">
       <div class="margin font-light" v-for="owe in settlement.owes" :key="owe.id">
-          {{owe.from}} betaalt {{owe.to}} €{{owe.amount}}
+          {{owe.from}} betaalt {{owe.to}} €{{owe.amount.toFixed(2)}}
       </div>
     </q-scroll-area>
   </div>

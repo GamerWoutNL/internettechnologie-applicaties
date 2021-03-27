@@ -73,6 +73,7 @@ export default class InputComponent extends Vue {
   }
 
   isNumber (n: string): boolean {
+    n = n.replace(/,/g, '.')
     return /^-?[\d.]+(?:e-?\d+)?$/.test(n)
   }
 }
