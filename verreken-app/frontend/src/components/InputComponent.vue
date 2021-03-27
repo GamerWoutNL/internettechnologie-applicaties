@@ -1,7 +1,7 @@
 <template>
   <div>
-    <q-input ref="name" class="margin font-light" outlined v-model="name" label="Naam" :rules="[ val => isNameCorrect || 'Vul een geldige naam in']" />
-    <q-input ref="amount" class="margin font-light" outlined v-model="amount" label="Inleg" :rules="[ val => isAmountCorrect || 'Vul een geldig bedrag in']" />
+    <q-input class="margin font-light" outlined v-model="name" label="Naam" :rules="[ val => isName(val) || val.length === 0 || 'Vul een geldige naam in']" />
+    <q-input class="margin font-light" outlined v-model="amount" label="Inleg" :rules="[ val => isNumber(val) || val.length === 0 || 'Vul een geldig bedrag in']" />
     <q-input class="margin font-light" outlined v-model="description" label="Beschrijving" />
     <div class="button-container">
       <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="onAdd" />
