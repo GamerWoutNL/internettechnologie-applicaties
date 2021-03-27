@@ -1,7 +1,8 @@
 <template>
   <q-page>
     <q-btn class="margin" icon="keyboard_return" size="5vw" round color="primary" @click="onBack" />
-    <q-scroll-area style="height: 82vh; max-width: 100vw;">
+    <div class="font-light margin" v-if="settlements.length === 0">Nog geen verrekeningen</div>
+    <q-scroll-area style="height: 82vh; max-width: 100vw;" v-else>
       <q-card class="font-medium margin" v-for="settlement in settlements" :key="settlement.id">
         <div class="date">{{settlement.date}}</div>
         <div class="font-light margin" v-for="owe in settlement.owes" :key="owe.id">

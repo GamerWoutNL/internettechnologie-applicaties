@@ -1,7 +1,7 @@
 <template>
   <div>
-    <q-input class="margin font-light" outlined v-model="name" label="Naam" :rules="[ val => isName(val) || 'Vul een geldige naam in (a-Z)']" />
-    <q-input class="margin font-light" outlined v-model="amount" label="Inleg" :rules="[ val => isNumber(val) || 'Vul een juist bedrag in']" />
+    <q-input ref="name" class="margin font-light" outlined v-model="name" label="Naam" :rules="[ val => isNameCorrect || 'Vul een geldige naam in']" />
+    <q-input ref="amount" class="margin font-light" outlined v-model="amount" label="Inleg" :rules="[ val => isAmountCorrect || 'Vul een geldig bedrag in']" />
     <q-input class="margin font-light" outlined v-model="description" label="Beschrijving" />
     <div class="button-container">
       <q-btn class="margin" icon="add" size="5vw" round color="primary" @click="onAdd" />
@@ -68,11 +68,11 @@ export default class InputComponent extends Vue {
     this.isAmountCorrect = true
   }
 
-  isName (n: any): boolean {
+  isName (n: string): boolean {
     return /^[a-zA-Z]+$/.test(n)
   }
 
-  isNumber (n: any): boolean {
+  isNumber (n: string): boolean {
     return /^-?[\d.]+(?:e-?\d+)?$/.test(n)
   }
 }
