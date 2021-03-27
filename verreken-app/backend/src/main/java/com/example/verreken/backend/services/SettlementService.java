@@ -43,7 +43,7 @@ public class SettlementService {
             String to = getKey(balance, values.get(persons - 1));
             double amount = -values.get(0);
 
-            if (amount <= 0.1) {
+            if (amount <= 0.01) {
                 break;
             }
 
@@ -53,7 +53,7 @@ public class SettlementService {
             owes.add(Owe.builder()
                     .from(from)
                     .to(to)
-                    .amount(amount)
+                    .amount(Math.round(amount * 100.0) / 100.0)
                     .build());
 
             values = new ArrayList<>(balance.values());
