@@ -1,21 +1,17 @@
 import axios from 'axios'
 import { Payment } from '../model/payment'
+import { config } from '../config'
 
 export default class HttpService {
-  private auth = {
-    username: 'user',
-    password: 'user'
-  }
-
   async postPayments (payments: Payment[]) {
-    return await axios.post('http://localhost:1245/api/payment', payments, {
-      auth: this.auth
+    return await axios.post(config.backend.host + '/api/payment', payments, {
+      auth: config.backend.auth
     })
   }
 
   async getHistory () {
-    return await axios.get('http://localhost:1245/api/history', {
-      auth: this.auth
+    return await axios.get(config.backend.host + '/api/history', {
+      auth: config.backend.auth
     })
   }
 }
