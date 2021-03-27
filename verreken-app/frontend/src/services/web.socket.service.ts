@@ -1,20 +1,17 @@
 import SockJS from 'sockjs-client'
 import Stomp, { Client } from 'webstomp-client'
+import { config } from '../config'
 
 export default class WebSocketService {
   private socket: unknown
   private stompClient: Client
-  private auth = {
-    username: 'user',
-    password: 'user'
-  }
 
   connect (onMessageReceive: (message: string) => void): void {
-    this.socket = new SockJS('http://localhost:1245/verreken')
+    this.socket = new SockJS(config.backend.host + '/verreken')
     this.stompClient = Stomp.over(this.socket)
 
     this.stompClient.connect(
-      this.auth,
+      config.backend.auth,
       (frame) => {
         console.log(frame)
 
